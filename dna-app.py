@@ -5,17 +5,16 @@
 import pandas as pd
 import streamlit as st
 import altair as alt
-from PIL import Image
 
 ######################
 # Page Title
 ######################
 
 st.write("""
-# DNA Nucleotide Count Web App
+# *DNA Nucleotide Count Web App*
 
-This app counts the nucleotide composition of query DNA!\n
-Made by Aniket Sonawane using the Data Professor Youtube Course
+This app counts the nucleotide composition of query DNA! and then spits out some stats about it!\n
+Made by Aniket Sonawane using the Data Professor Youtube Course (Thank you professor!)
 
 ***
 """)
@@ -41,7 +40,7 @@ st.write("""
 """)
 
 ## Prints the input DNA sequence
-st.header(' This is what you input as the DNA Query')
+st.header(' *Just to double check..*')
 sequence
 
 st.write("""
@@ -69,7 +68,7 @@ X = DNA_nucleotide_count(sequence)
 
 
 ### 2. Print text
-st.subheader('So..')
+st.subheader('*So from what you have given me:*')
 st.write('There are  ' + str(X['A']) + ' adenine (A) nucleotides')
 st.write('There are  ' + str(X['T']) + ' thymine (T) nucleotides')
 st.write('There are  ' + str(X['G']) + ' guanine (G) nucleotides')
@@ -90,7 +89,7 @@ percentage_t = round((count_t / total_length) * 100)
 percentage_c = round((count_c / total_length) * 100)
 percentage_g = round((count_g / total_length) * 100)
 
-st.subheader("Percentages %")
+st.subheader("*Percentages %*")
 st.write('Percentage of A nucleotides: ',str(percentage_a),'%')
 st.write('Percentage of T nucleotides:' ,str(percentage_t), '%')
 st.write('Percentage of C nucleotides :', str(percentage_c), '%') 
@@ -100,7 +99,7 @@ st.write('Percentage of G nucleotides :', str(percentage_g), '%')
 st.write("""
 ***
 """)
-st.subheader("The Guanine-Cytosine (GC) content and Predicted Melting Temperature(Tm)")
+st.subheader("*The Guanine-Cytosine (GC) content and Predicted Melting Temperature(Tm)*")
 st.write("""
 The GC content has a proportional relationship with the melting temperature of the sequence
 
@@ -143,7 +142,7 @@ Try messing around with the sequence to verify this relationship!
 
 
 ### 3. Display DataFrame
-st.subheader('Tabluar Form')
+st.subheader('*Tabluar Form*')
 df = pd.DataFrame.from_dict(X, orient='index')
 df = df.rename({0: 'count'}, axis='columns')
 df.reset_index(inplace=True)
@@ -155,8 +154,8 @@ st.write("""
 """)
          
 ### 4. Display Bar Chart using Altair
-st.subheader('Bar Chart ')
-p = alt.Chart(df).mark_bar().encode(
+st.subheader('*Bar Chart*')
+p = alt.Chart(df).mark_bar(color= 'orange').encode(
     x ='nucleotide',
     y='count'
 )
@@ -164,5 +163,17 @@ p = p.properties(
     width=alt.Step(80)  # controls width of bar.
 )
 st.write(p)
+
+st.write("""
+***
+""")
+         
+st.subheader(" *And also a Pie Chart! :100:* ")
+q = alt.Chart(df).mark_arc().encode(
+  theta= 'count',
+  color= 'nucleotide'
+)
+
+q
 
 st.subheader('Thank you!!!')
