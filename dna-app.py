@@ -30,10 +30,12 @@ st.header('Enter DNA sequences')
 sequence_input = "GAACACGTGGAGGCAAACAGGAAGGTGAAGAAGAACTTATCCTATCAGGACGGAAGGTCCTGTGCTCGGG\nATCTTCCAGACGTCGCGACTCTAAATTGCCCCCTCTGAGGTCAAGGAACACAAGATGGTTTTGGAAATGC\nTGAACCCGATACATTATAACATCACCAGCATCGTGCCTGAAGCCATGCCTGCTGCCACCATGCCAGTCCT"
 
 #sequence = st.sidebar.text_area("Sequence input", sequence_input, height=250)
-sequence = st.text_area("Input sequence here", sequence_input, height=250)
-sequence = sequence.splitlines()
-sequence = ''.join(sequence) # Concatenates list to string
 
+sequence = st.text_area("Input sequence here", sequence_input, height=250)
+result = st.button("Search")
+if result:
+  sequence = sequence.splitlines()
+  sequence = ''.join(sequence)
 st.write("""
 ***
 """)
